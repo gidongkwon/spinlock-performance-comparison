@@ -1,0 +1,10 @@
+mod backoff;
+mod lock;
+mod spin;
+mod tas;
+mod ttas;
+pub use self::backoff::BackoffLock;
+pub use self::lock::Lock;
+pub use self::spin::Spinlock;
+pub use self::tas::TASLock;
+pub use self::ttas::TTASLock;
