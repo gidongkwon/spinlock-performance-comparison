@@ -7,7 +7,7 @@ use std::time::Instant;
 use locks::{BackoffLock, Lock, Spinlock, TASLock, TTASLock};
 
 const THREAD_COUNTS: [u64; 5] = [2, 4, 8, 16, 32];
-const REPEAT_COUNT: u32 = 50;
+const REPEAT_COUNT: u32 = 5;
 const START: u64 = 1_000_000;
 const END: u64 = 5_000_000;
 const SEP: &str = "\t";
@@ -100,8 +100,8 @@ fn no_lock() {
 fn main() {
     println!("Lock Type{SEP}{}", THREAD_COUNTS.map(|s| { s.to_string() }).join(SEP));
     no_lock();
-    benchmark_lock::<Spinlock>("Spinlock");
-    benchmark_lock::<TASLock>("TASLock");
     benchmark_lock::<TTASLock>("TTASLock");
+    benchmark_lock::<TASLock>("TASLock");
+    benchmark_lock::<Spinlock>("Spinlock");
     benchmark_lock::<BackoffLock>("BackoffLock");
 }
