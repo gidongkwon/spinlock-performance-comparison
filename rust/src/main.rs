@@ -100,8 +100,8 @@ fn no_lock() {
 fn main() {
     println!("Lock Type{SEP}{}", THREAD_COUNTS.map(|s| { s.to_string() }).join(SEP));
     no_lock();
+    benchmark_lock::<Spinlock>("Spinlock");
     benchmark_lock::<TTASLock>("TTASLock");
     benchmark_lock::<TASLock>("TASLock");
-    benchmark_lock::<Spinlock>("Spinlock");
     benchmark_lock::<BackoffLock>("BackoffLock");
 }

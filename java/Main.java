@@ -15,6 +15,7 @@ public class Main {
                 .collect(Collectors.joining(SEP)));
         
         noLock();
+        benchmarkLock(new Spinlock(), "Spinlock");
         benchmarkLock(new TTASLock(), "TTASLock");
         benchmarkLock(new TASLock(), "TASLock");
         benchmarkLock(new BackoffLock(), "BackoffLock");
@@ -59,6 +60,7 @@ public class Main {
 
                 long duration = System.currentTimeMillis() - startTime;
                 timeAvg += duration;
+                // System.out.println(sum[0] + SEP);
             }
 
             timeAvg /= REPEAT_COUNT;
